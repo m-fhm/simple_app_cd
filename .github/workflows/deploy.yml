@@ -32,6 +32,9 @@ jobs:
           key: ${{ secrets.AZURE_VM_SSH_KEY }}
           script: |
             cd /home/azureuser/myapp
-            # Run and fully detach
+            sudo fuser -k 5050/tcp || true
+
+            # 🚀 Start app again
             nohup python3 app.py > app.log 2>&1 &
-            echo "App deployed and running in background"
+
+            echo "App restarted on port 5001"
